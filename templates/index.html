@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson Locator</title>
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='semantic.css') }}" type="text/css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='zyComment.css') }}" type="text/css" />
+</head>
+
+<body>
+  <!--header-->
+  <header>
+    <div class="container header">
+      <div class="logo"><img src="{{ url_for('static', filename='imgs/logo.png') }}" alt="123"></div>
+      <div class="navs">
+        <div class="nav">
+          <a href="./">HOME</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- main -->
+  <main>
+    <div class="container">
+      <div class="form">
+        <input type="text" placeholder="Search for lesson names, separated by comma" class="formInput" id="searchInput">
+        <div class="search-icon clear" id="clearSearch"></div>
+        <!--        <div class="search-icon search"></div>    -->
+      </div>
+
+      <div class="main-area">
+        <div class="filter-area">
+
+          <h3>
+            <div class="left col-md-7" style="padding-top: 4px;">Fliters</div>
+            <div class="right col-md-5">
+              <button class="btn" onclick="unCheckFilters()">Clear all</button>
+            </div>
+          </h3>
+
+          <div id="filters" class="filters">
+            <div class="filter">
+              <div class="name">Subject</div>
+              <div class="checkboxs">
+                <div class="checkbox"><input type="checkbox" id="subject_art" name="subject_art">Art</div>
+                <div class="checkbox"><input type="checkbox" id="subject_music" name="subject_music">Music</div>
+                <div class="checkbox"><input type="checkbox" id="subject_math" name="subject_math">Math</div>
+                <div class="checkbox"><input type="checkbox" id="subject_science" name="subject_science">Science</div>
+              </div>
+            </div>
+            <div class="filter">
+              <div class="name">Student Grade</div>
+              <div class="checkboxs">
+                <div class="checkbox"><input type="checkbox" id="grade_k" name="grade_k">Kindergarten</div>
+                <div class="checkbox"><input type="checkbox" id="grade_1" name="grade_1">Grade 1</div>
+                <div class="checkbox"><input type="checkbox" id="grade_2" name="grade_2">Grade 2</div>
+                <div class="checkbox"><input type="checkbox" id="grade_3" name="grade_3">Grade 3</div>
+                <div class="checkbox"><input type="checkbox" id="grade_4" name="grade_4">Grade 4</div>
+                <div class="checkbox"><input type="checkbox" id="grade_5" name="grade_5">Grade 5</div>
+                <div class="checkbox"><input type="checkbox" id="grade_6" name="grade_6">Grade 6</div>
+                <div class="checkbox"><input type="checkbox" id="grade_7" name="grade_7">Grade 7</div>
+                <div class="checkbox"><input type="checkbox" id="grade_8" name="grade_8">Grade 8</div>
+                <div class="checkbox"><input type="checkbox" id="grade_9" name="grade_9">Grade 9</div>
+              </div>
+            </div>
+            <div class="filter">
+              <div class="name">Environment</div>
+              <div class="checkboxs">
+                <div class="checkbox"><input type="checkbox" id="environment_block" name="environment_block">Block-based</div>
+                <div class="checkbox"><input type="checkbox" id="environment_Scratch" name="environment_Scratch">Scratch</div>
+                <div class="checkbox"><input type="checkbox" id="environment_Java" name="environment_Java">Java</div>
+                <div class="checkbox"><input type="checkbox" id="environment_Python" name="environment_Python">Python</div>
+              </div>
+            </div>
+            <div class="filter">
+              <div class="name">Coding Concept</div>
+              <div class="checkboxs">
+                <div class="checkbox"><input type="checkbox" id="concept_sequence" name="concept_sequence">Sequence</div>
+                <div class="checkbox"><input type="checkbox" id="concept_loop" name="concept_loop">Loop</div>
+                <div class="checkbox"><input type="checkbox" id="concept_condition" name="concept_condition">Condition</div>
+              </div>
+            </div>
+            <div class="filter">
+              <div class="name">Standards</div>
+              <div class="checkboxs">
+                <div class="checkbox"><input type="checkbox" id="standards_CSTA" name="standards_CSTA">CSTA</div>
+                <div class="checkbox"><input type="checkbox" id="standards_K12CS" name="standards_K12CS">K12CS</div>
+                <div class="checkbox"><input type="checkbox" id="standards_Code.org" name="standards_Code.org">Code.org</div>
+              </div>
+            </div>
+            <div class="filter">
+              <div class="name">Device</div>
+              <div class="checkboxs">
+                <div class="checkbox"><input type="checkbox" id="device_micro: bits" name="device_micro: bits">Micro: bits</div>
+                <div class="checkbox"><input type="checkbox" id="device_finch" name="device_finch robot">Finch Robot</div>
+                <div class="checkbox"><input type="checkbox" id="device_logoev3" name="device_logoev3">LOGO EV3</div>
+              </div>
+            </div>
+            <div class="filter">
+              <div class="name">Course Length (not implemented)</div>
+              <div class="checkboxs">
+                <div class="checkbox"><input type="checkbox" name="option4">
+                  < 1 Hour</div>
+                    <div class="checkbox"><input type="checkbox" name="option5">1 - 10 Hours</div>
+                    <div class="checkbox"><input type="checkbox" name="option6">10 - 20 Hours</div>
+                </div>
+              </div>
+              <div class="filter">
+                <div class="name">Student Level</div>
+                <div class="checkboxs">
+                  <div class="checkbox"><input type="checkbox" id="level_beginner" name="level_beginner">Beginner</div>
+                  <div class="checkbox"><input type="checkbox" id="level_intermediate" name="level_intermediate">Intermediate</div>
+                  <div class="checkbox"><input type="checkbox" id="level_advance" name="level_advance">Advance</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="articles">
+
+            <div class="page">
+              <div id="num_results" class="result">Result</div>
+              <div class="show-rule">
+                <div>Show: </div>
+                <div>
+                  <select style="float: right; margin-right: 12px;" class="btn btn-default dropdown" id="dropdownMenu1" onchange="changeItemsPerPage(this.value)">
+                    <option class="dropdown-option" value="10">10</option>
+                    <option class="dropdown-option" value="20">20</option>
+                    <option class="dropdown-option" value="30">30</option>
+                    <option class="dropdown-option" value="40">40</option>
+                  </select>
+                </div>
+                <div>Sort by: </div>
+                <div>
+                  <select class="btn btn-default dropdown" id="dropdownMenu2" onchange="">
+                    <option class="dropdown-option" value="10">(not implemented)</option>
+                    <option class="dropdown-option" value="20">Grade</option>
+                    <option class="dropdown-option" value="20">Course length</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- 显示和隐藏课程下拉列表 -->
+            <!--
+            <div>
+              <div id="toggleButton" class="pull-left">点这里显示和隐藏课程下拉列表</div>
+              <span id="triangle" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+              <div class="Info hidden" id="contentDiv">
+                <ul id="result_session_ul">
+                  <li class="titleInfo">
+                    <div class="titleInfo1 col-md-10">
+                      <a>Demonstrating Change Over Time Using Moon Phases</a>
+                    </div>
+                    <div class="titleInfo2 col-md-2">c2 | 1 | music</div>
+                    <div class="clear"></div>
+                  </li>
+                  <li class="titleInfo">
+                    <div class="titleInfo1 col-md-10">
+                      <a>Demonstrating Change Over Time Using Moon Phases</a>
+                    </div>
+                    <div class="titleInfo2 col-md-2">c2 | 1 | music</div>
+                    <div class="clear"></div>
+                  </li>
+                  <li class="titleInfo">
+                    <div class="titleInfo1 col-md-10">
+                      <a>Demonstrating Change Over Time Using Moon Phases</a>
+                    </div>
+                    <div class="titleInfo2 col-md-2">c2 | 1 | music</div>
+                    <div class="clear"></div>
+                  </li>
+                  <li class="titleInfo">
+                    <div class="titleInfo1 col-md-10">
+                      <a>Demonstrating Change Over Time Using Moon Phases</a>
+                    </div>
+                    <div class="titleInfo2 col-md-2">c2 | 1 | music</div>
+                    <div class="clear"></div>
+                  </li>
+                  <li class="titleInfo">
+                    <div class="titleInfo1 col-md-10">
+                      <a>Demonstrating Change Over Time Using Moon Phases</a>
+                    </div>
+                    <div class="titleInfo2 col-md-2">c2 | 1 | music</div>
+                    <div class="clear"></div>
+                  </li>
+                  <li class="titleInfo">
+                    <div class="titleInfo1 col-md-10">
+                      <a>Demonstrating Change Over Time Using Moon Phases</a>
+                    </div>
+                    <div class="titleInfo2 col-md-2">c2 | 1 | music</div>
+                    <div class="clear"></div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            -->
+            <!-- 显示和隐藏课程下拉列表 END-->
+
+            <div class="list">
+              <ul id="result_lesson_ul">
+
+                <li>
+                  <div class="top-line">
+                    <div class="title"><a href="">article title;article title;article title;article title;article title;article title;article title;article title;article title;article title;article title;article title;article title;article title;</a>
+                    </div>
+                    <div class="collect"></div>
+                  </div>
+                  <div class="bottom-line">
+                    someone's name,someone's name,someone's name,someone's name,<span>|</span><span>aaaaa(2021)</span>
+                  </div>
+
+                </li>
+                <li>
+                  <div class="top-line">
+                    <div class="title"><a href="">article title;article title;article title;article title;article title;</a></div>
+                    <div class="collect collected"></div>
+                  </div>
+                  <div class="bottom-line">
+                    someone's name,someone's name,someone's name,someone's name,<span>|</span><span>aaaaa(2021)</span>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+
+            <nav aria-label="Page navigation">
+              <ul id="pagination" class="pagination">
+                <li>
+                  <a aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li><a>1</a></li>
+                <li>
+                  <a aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <div class="dialog reviewDialog" id="reviewDialog">
+            <h3 style="font-size:18px;padding-bottom:10px;text-align: center;">Write Review</h3>
+            <div class="checkbox">
+              <p class="pull-left rates">Rates</p>
+              <div class="pull-left">
+                <div class="star" id="1reviewStar" onclick="changeReviewStars(this.id)"></div>
+                <div class="star" id="2reviewStar" onclick="changeReviewStars(this.id)"></div>
+                <div class="star" id="3reviewStar" onclick="changeReviewStars(this.id)"></div>
+                <div class="star" id="4reviewStar" onclick="changeReviewStars(this.id)"></div>
+                <div class="star" id="5reviewStar" onclick="changeReviewStars(this.id)"></div>
+              </div>
+            </div>
+            <div class="clear"></div>
+            <div class="checkbox">
+              <p class="pull-left reviews">Reviews</p>
+              <textarea id="reviewText" name="reviewText" rows="4" cols="50"></textarea>
+            </div>
+            <div class="checkbox">Upload Image<input type="file" name="option4"></div>
+            <button class="btn btn-primary mr10" onclick="submitReviewAlert()">Submit</button>
+            <button class="btn" onclick="closeReviewDialog()">Close</button>
+          </div>
+
+          <div class="dialog chatDialog" id="chatDialog">
+            <h3 style="font-size:18px;padding-bottom:10px;text-align: center;">This is the chat room</h3>
+
+            <!-- chat -->
+
+            <div id="commentItems" class="ui threaded comments" style="margin-bottom:20px;">
+              <div class="text" style="font-size:18px;padding-bottom:10px;"> </div>
+            </div>
+
+
+            <div id="newThreadForm">
+              <div class="ui large form ">
+                <div class="two fields">
+                  <div class="field">
+                    <input type="text" id="userName" />
+                    <label class="userNameLabel" for="userName">Your Name</label>
+                  </div>
+                </div>
+                <div class="contentField field">
+                  <textarea id="commentContent"></textarea>
+                  <label class="commentContentLabel" for="commentContent">New Chat Thread</label>
+                </div>
+                <button id="submitComment" class="btn btn-primary mr10" onclick="submitChatAlert()">Submit</button>
+                <button class="btn" onclick="closeChatDialog()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </main>
+
+  <!--footer-->
+  <footer>
+    <div class="container footer">
+      <ul>
+        <li>
+          <p><a href="">create by Eric</a></p>
+        </li>
+        <li>
+          <p><a href="">about us</a></p>
+        </li>
+        <li>
+          <p><a href="">team</a></p>
+        </li>
+        <li>
+          <p><a href="">thanks</a></p>
+        </li>
+      </ul>
+    </div>
+  </footer>
+
+
+
+
+
+  <!-- chat对话框 -->
+  <!-- 仅用jquery1.7.2时，chat可用。评星打不开。仅用jquery 3.5.1时，chat不显示留言回复。两个都用时，评星正常显示，chat不能回复留言。 -->
+  <script src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <!--
+  <script type="text/javascript" src="js/zyComment.js"></script>
+  <script type="text/javascript">
+    var agoComment = [{
+        "id": 1,
+        "userName": "User Name 1",
+        "time": "2023-04-04",
+        "topic": 1,
+        "content": "Hi, this is the first comment"
+      },
+      {
+        "id": 2,
+        "userName": "User Name 2",
+        "time": "2023-04-04",
+        "topic": 0,
+        "content": "This is the reply to the first comment"
+      },
+    ];
+    $("#articleComment").zyComment({
+      "width": "355",
+      "height": "33",
+      "agoComment": window.chat,
+      "callback": function(comment) {
+        console.info("填写内容返回值：");
+        console.info(comment);
+        // 添加新的评论
+        $("#articleComment").zyComment("setCommentAfter", {
+          "id": 123,
+          "name": "name",
+          "content": "content",
+          "time": "2023-04-14"
+        });
+      }
+    });
+  </script>
+-->
+  <!-- 显示和隐藏课程下拉列表 -->
+  <!--
+  <script>
+    // 获取按钮和内容的引用
+    var toggleButton = document.getElementById('toggleButton');
+    var contentDiv = document.getElementById('contentDiv');
+    var triangle = document.getElementById('triangle');
+
+    // 添加点击事件监听器
+    toggleButton.addEventListener('click', function() {
+      if (contentDiv.classList.contains('hidden')) {
+        // 如果内容隐藏，则显示内容
+        contentDiv.classList.remove('hidden');
+        triangle.classList.add('glyphicon-triangle-top');
+      } else {
+        // 如果内容显示，则隐藏内容
+        contentDiv.classList.add('hidden');
+        triangle.classList.remove('glyphicon-triangle-top');
+      }
+    });
+  </script>
+-->
+  <script src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='index.js') }}"></script>
+
+</body>
+
+</html>
