@@ -23,15 +23,12 @@ An IDE for website code editing
 ### Environment Setup
 
 -   Clone
-    -   `git clone https://anonymous.4open.science/r/wizard-EC11.git`
+    -   `git clone https://anonymous.4open.science/r/dissertation_repo_locator.git`
 -   Create a virtual environment (optional)
     -   `conda create -n lessonlocator python=3.7 -y`
     -   `conda activate lessonlocator`
 -   Install Flask (if you did not have it)
     -   `pip install Flask`
--   Run
-    -   cd `your directory`
-    -   `python main.py`
 
 ## To Run
 
